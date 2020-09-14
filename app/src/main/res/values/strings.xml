@@ -1,13 +1,12 @@
 <resources>
-    <string name="app_name">TASK DETAILS</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">TASK DETAILS</string>  
+    <string name="link_development">LINK DEVELOPMENT</string>
+    <string name="nav_drawer_open">Close Drawer</string>
+    <string name="nav_drawer_close">Open Drawer</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="explore">Explore</string>
+    <string name="live_chat">Live Chat</string>
+    <string name="gallery">Gallery</string>
+    <string name="wishlist">Wish List</string>
+    <string name="e_magazine">E-Magazine</string>
 </resources>

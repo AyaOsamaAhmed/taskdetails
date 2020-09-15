@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import retrofit2.Response
 import java.io.IOException
 
@@ -15,7 +16,7 @@ abstract class SafeAmiRequestLoadingDialogue(var mContext: Context) {
     suspend fun <T : Any> apiRequest(call: suspend () -> Response<T>): T? {
         if (! isConnectedToNetwork(mContext)) {
             Log.e("SafeApiRequest", "no network")
-            throw ApiException("no network connection")
+             throw ApiException("no network connection")
         }
         if (mContext is Activity)
             loadingDialoge =
@@ -35,20 +36,6 @@ abstract class SafeAmiRequestLoadingDialogue(var mContext: Context) {
         }
     }
 
-    @Throws(ApiException::class)
-    suspend fun <T : Any> adiRequestNoDialogue(call: suspend () -> Response<T>): T? {
-        if (!isConnectedToNetwork(mContext)) {
-            Log.e("SafeApiRequest", "no network")
-            throw ApiException("no network connection")
-        }
-        val response = call.invoke()
-        if (response.isSuccessful) {
-            return response.body()!!
-        } else {
-            Log.e("SafeApiRequest", response.message() + "" + response.raw().request.url)
-            throw ApiException(response.code().toString())
-        }
-    }
 
     fun isConnectedToNetwork(mContext: Context): Boolean {
         val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

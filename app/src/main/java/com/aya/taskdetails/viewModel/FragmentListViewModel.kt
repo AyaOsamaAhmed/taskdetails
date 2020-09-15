@@ -1,7 +1,10 @@
 package com.aya.taskdetails.viewModel
 
+import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,7 +40,7 @@ class FragmentListViewModel(
      var apiClient: ApiInterface
 
     private var navController: NavController? = null
-
+    var context:Context
 
     lateinit var adapter: ArticleAdapter
     //TAG to use later in logs
@@ -49,25 +52,59 @@ class FragmentListViewModel(
         //Init network layer
         apiClient = RetrofitClient.getInstance(mContext).api!!
         generalDataRepository = GeneralDataRepository(apiClient, mContext)
+        context = mContext
     }
 
     fun onClick(view: View?){
 
         }
 
+
     fun getArticle() {
-        getDataJob = Coroutines.ioThenMain({ generalDataRepository.getHomeData() },
+        getDataJob = Coroutines.ioThenMain({
+            try {
+                generalDataRepository.getHomeData()
+            } catch (e: Exception) {
+                (mContext as Activity?)?.runOnUiThread {
+                    Toast.makeText(mContext,"no internet connection",Toast.LENGTH_SHORT).show()
+                }
+                Log.e("getArticle", "exception handled" + (e.toString()))
+
+            }
+        },
             {
-                getArticle_( (it as HomeResponse).articles )
+                try {
+                    if (it is HomeResponse?)
+                        getArticle_((it as HomeResponse)?.articles)
+                    else {
+                        //TODO Display Error
+                    }
+                } catch (e: Exception) {
+                    Log.e("getArticle", "exception handled" + (e.toString()))
+                }
             })
-
-
     }
 
+
+
     fun getArticle_( ar_list :List<Article>) {
-        getDataJob = Coroutines.ioThenMain({ generalDataRepository.getHomeData_2() },
+        getDataJob = Coroutines.ioThenMain({
+            try {
+                generalDataRepository.getHomeData_2()
+            }catch (e:Exception){
+                (mContext as Activity?)?.runOnUiThread {
+                    Toast.makeText(mContext,"no internet connection",Toast.LENGTH_SHORT).show()
+                }
+                Log.e("getArticle", "exception handled" + (e.toString()))
+            }},
             {
+                try{
+
                 _article.value = ar_list + (it as HomeResponse).articles
+
+            } catch (e:Exception){
+                    Log.e("getArticle", "exception handled" + (e.toString()))
+                }
             })
     }
 

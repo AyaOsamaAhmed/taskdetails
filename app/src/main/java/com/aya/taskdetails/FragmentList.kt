@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.aya.taskdetails.databinding.FragmentListBinding
 import com.aya.taskdetails.network.responseModel.data.Article
@@ -35,7 +36,7 @@ class FragmentList   : Fragment() , View.OnClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         factory = FragmentListViewModelFactory(requireActivity(), binding)
-        viewModel = ViewModelProviders.of(this, factory).get(FragmentListViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(FragmentListViewModel::class.java)
         // init Recycler
         viewModel.articleRecyclerViewInit(binding.articalRecyclerview)
         //open drawer
@@ -55,6 +56,8 @@ class FragmentList   : Fragment() , View.OnClickListener {
         else
             swithVisablityView(binding.articalRecyclerview, binding.noArticleLayout)
     }
+
+    //to hide first view parameter and display the 2nd one
     fun swithVisablityView(v1: View, v2: View) {
         v1.visibility = View.GONE
         v2.visibility = View.VISIBLE

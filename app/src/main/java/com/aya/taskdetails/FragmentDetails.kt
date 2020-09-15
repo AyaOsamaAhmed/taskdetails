@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.aya.taskdetails.databinding.FragmentDetailsBinding
 import com.aya.taskdetails.network.responseModel.data.Article
@@ -60,7 +61,7 @@ class FragmentDetails   : Fragment() , View.OnClickListener {
                requireActivity(),
                 binding
             )
-        viewModel = ViewModelProviders.of(this, factory).get(FragmentDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(FragmentDetailsViewModel::class.java)
 
         //close drawer
         (activity as DrawerLocker?)!!.setDrawerEnabled(false)

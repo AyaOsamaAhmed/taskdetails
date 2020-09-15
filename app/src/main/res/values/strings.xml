@@ -9,4 +9,7 @@
     <string name="gallery">Gallery</string>
     <string name="wishlist">Wish List</string>
     <string name="e_magazine">E-Magazine</string>
+
+    <string name="no_article">No Articles</string>
+    <string name="open_web">OPEN WEBSITE</string>
 </resources>

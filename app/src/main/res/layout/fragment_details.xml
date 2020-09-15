@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@color/color_white_grey"
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:layout_marginBottom="70dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:id="@+id/banner"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@drawable/background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <TextView
+            android:id="@+id/title_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Header Article "
+            android:layout_margin="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:maxWidth="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/banner" />
+
+        <TextView
+            android:id="@+id/by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="By "
+            android:textColor="@color/color_grey"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/title_article"
+            app:layout_constraintTop_toBottomOf="@id/title_article" />
+        <TextView
+            android:id="@+id/auther_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="add location"
+            android:textColor="@color/color_grey"
+            android:textSize="14sp"
+            android:maxWidth="300dp"
+            app:layout_constraintStart_toEndOf="@id/by"
+            app:layout_constraintTop_toBottomOf="@id/title_article" />
+
+        <TextView
+            android:id="@+id/date_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="add location"
+            android:textColor="@color/color_grey"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/banner" />
+
+        <TextView
+            android:id="@+id/details_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="add location"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/color_grey"
+            android:textSize="14sp"
+            android:maxWidth="300dp"
+            app:layout_constraintStart_toStartOf="@id/by"
+            app:layout_constraintTop_toBottomOf="@id/auther_article"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/open_website"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
+        android:text="@string/open_web"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

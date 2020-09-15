@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.aya.taskdetails.databinding.FragmentListBinding
 import com.aya.taskdetails.network.responseModel.data.Article
 import com.aya.taskdetails.viewModel.FragmentListViewModel

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.aya.taskdetails.R
@@ -16,14 +17,15 @@ import com.squareup.picasso.Picasso
 import java.util.*
 
 
-class ArticleAdapter(val context: Context, article: List<Article>) :
+class ArticleAdapter(val context: Context, article: List<Article> , navController: NavController) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
     var article_list: List<Article> = ArrayList()
     var mContext: Context
-
+    var navController:NavController? = null
     init {
         this.mContext = context
         this.article_list = article
+        this.navController = navController
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -87,6 +89,15 @@ class ArticleAdapter(val context: Context, article: List<Article>) :
 
         override fun onClick(view: View) {
             Log.i("article adapter","clicking.........." + url)
+            var bundle = Bundle()
+            bundle.putString("title", article_item!!.title)
+            bundle.putString("url", article_item!!.url)
+            bundle.putString("author", article_item!!.author)
+            bundle.putString("description", article_item!!.description)
+            bundle.putString("publishedAt", article_item!!.publishedAt)
+            bundle.putString("urlToImage", article_item!!.urlToImage)
+
+            navController!!.navigate(R.id.action_FragmentList_to_FragmentDetails,bundle)
         }
 
     }

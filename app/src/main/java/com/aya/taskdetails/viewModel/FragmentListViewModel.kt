@@ -38,7 +38,6 @@ class FragmentListViewModel(
 
     private var navController: NavController? = null
 
-    lateinit var application: FragmentActivity
 
     lateinit var adapter: ArticleAdapter
     //TAG to use later in logs
@@ -77,7 +76,7 @@ class FragmentListViewModel(
     }
 
     fun articleRecyclerViewInit(article_recyclerview: RecyclerView) {
-        adapter = ArticleAdapter(mContext.applicationContext, ArrayList())
+        adapter = ArticleAdapter(mContext.applicationContext, ArrayList(),navController!!)
         val gridLayoutManager = GridLayoutManager(mContext, 1, GridLayoutManager.VERTICAL, false)
         article_recyclerview.layoutManager = gridLayoutManager
         article_recyclerview.setHasFixedSize(true)

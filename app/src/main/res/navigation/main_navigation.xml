@@ -11,5 +11,15 @@
         android:id="@+id/FragmentList"
         android:name="com.aya.taskdetails.FragmentList"
         tools:layout="@layout/fragment_list"
+        >
+        <action
+            android:id="@+id/action_FragmentList_to_FragmentDetails"
+            app:destination="@id/FragmentDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentDetails"
+        android:name="com.aya.taskdetails.FragmentDetails"
+        tools:layout="@layout/fragment_details"
         />
 </navigation>

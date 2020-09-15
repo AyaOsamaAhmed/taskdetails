@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 
 import com.aya.taskdetails.databinding.ActivityMainBinding
 import com.aya.taskdetails.viewModel.MainActivityViewModel
@@ -21,7 +24,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding : ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
 
-    private val drawerLayout: DrawerLayout? = null
+    private lateinit var navController: NavController
     private val nav: NavigationView? = null
     private val mDrawerToggle: ActionBarDrawerToggle? = null
     private val toolbar: Toolbar? = null
@@ -38,11 +41,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         viewModel.Init(binding, this)
 
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+
+        binding.navView.setupWithNavController(navController)
+
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.navView.setNavigationItemSelectedListener(this)
         viewModel.initDrawerToggle(this)
 
 
-        binding.navView.setNavigationItemSelectedListener(this)
+
 
     }
 

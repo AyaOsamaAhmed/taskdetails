@@ -53,7 +53,7 @@ class MainActivityViewModel : ViewModel(), NavigationView.OnNavigationItemSelect
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.search -> {
-               Toast.makeText(context,"Search Icon",Toast.LENGTH_LONG)
+               Toast.makeText(context,"Search Icon",Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -61,11 +61,11 @@ class MainActivityViewModel : ViewModel(), NavigationView.OnNavigationItemSelect
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.explore -> Toast.makeText(context,"Explore",Toast.LENGTH_LONG)
-            R.id.live -> Toast.makeText(context,"Live Chat",Toast.LENGTH_LONG)
-            R.id.gallery -> Toast.makeText(context,"Gallery Icon",Toast.LENGTH_LONG)
-            R.id.wishlist -> Toast.makeText(context,"Wish List Icon",Toast.LENGTH_LONG)
-            R.id.e_magazine -> Toast.makeText(context,"E-Magazine Icon",Toast.LENGTH_LONG)
+            R.id.explore -> Toast.makeText(context,"Explore",Toast.LENGTH_LONG).show()
+            R.id.live -> Toast.makeText(context,"Live Chat",Toast.LENGTH_LONG).show()
+            R.id.gallery -> Toast.makeText(context,"Gallery Icon",Toast.LENGTH_LONG).show()
+            R.id.wishlist -> Toast.makeText(context,"Wish List Icon",Toast.LENGTH_LONG).show()
+            R.id.e_magazine -> Toast.makeText(context,"E-Magazine Icon",Toast.LENGTH_LONG).show()
 
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)

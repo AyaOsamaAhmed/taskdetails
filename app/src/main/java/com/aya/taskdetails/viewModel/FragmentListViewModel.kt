@@ -48,11 +48,7 @@ class FragmentListViewModel(
         article_list = listOf<Article>()
         //Init network layer
         apiClient = RetrofitClient.getInstance(mContext).api!!
-        //ApiClient.getInstance()
-
-
         generalDataRepository = GeneralDataRepository(apiClient, mContext)
-
     }
 
     fun onClick(view: View?){

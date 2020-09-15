@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.aya.taskdetails.R
 import com.aya.taskdetails.network.responseModel.data.Article
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -72,9 +72,18 @@ class ArticleAdapter(val context: Context, article: List<Article> , navControlle
         fun bind(articleItem: Article?) {
             title_article?.text = articleItem!!.title
             auther_article?.text = articleItem!!.author
-            date_article?.text = articleItem!!.publishedAt
             url = articleItem.url
+            // formate date
+            var dateArticle :String = articleItem!!.publishedAt.substring(0,10)
+            val dateFormat =  SimpleDateFormat("yyyy-MM-dd")
+            val sourceDate :Date
+            sourceDate = dateFormat.parse(dateArticle)
+            val format = SimpleDateFormat("MMM dd, yyyy")
+            val date: String = format.format(sourceDate)
+            // put date in design
+            date_article?.text = date
 
+            // load url Image in design
             if (!articleItem.urlToImage.equals("") )
                 Picasso.get()
                     .load(articleItem.urlToImage)
@@ -97,6 +106,7 @@ class ArticleAdapter(val context: Context, article: List<Article> , navControlle
             bundle.putString("publishedAt", article_item!!.publishedAt)
             bundle.putString("urlToImage", article_item!!.urlToImage)
 
+            // move to fragment details
             navController!!.navigate(R.id.action_FragmentList_to_FragmentDetails,bundle)
         }
 

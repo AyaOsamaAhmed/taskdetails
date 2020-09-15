@@ -5,8 +5,10 @@ import android.content.Context
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModel
 import com.aya.taskdetails.R
 import com.aya.taskdetails.databinding.ActivityMainBinding
@@ -18,18 +20,18 @@ class MainActivityViewModel : ViewModel(), NavigationView.OnNavigationItemSelect
     lateinit var context: Context
     lateinit var mDrawerToggle: ActionBarDrawerToggle
 
-
     private val TAG = "MainActivityViewModel"
-
+    lateinit var activity: Activity
 
     fun Init(
         activityMainBinding: ActivityMainBinding,
-        context: Context
+        context: Context ,
+        activity: Activity
     ) {
 
       this.binding = activityMainBinding
-        this.context = context
-
+      this.context = context
+      this.activity = activity
     }
 
     fun initDrawerToggle(activity: Activity) {
@@ -46,9 +48,6 @@ class MainActivityViewModel : ViewModel(), NavigationView.OnNavigationItemSelect
         mDrawerToggle.syncState()
         binding.drawerLayout.addDrawerListener(mDrawerToggle)
     }
-
-
-
 
     override fun onClick(view: View?) {
         when (view?.id) {
@@ -71,6 +70,29 @@ class MainActivityViewModel : ViewModel(), NavigationView.OnNavigationItemSelect
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         Log.i(TAG, "onNavigationItemSelected : ${item.title}")
         return true
+    }
+
+
+    fun setDrawerEnabled(enabled: Boolean, supportActionBar: ActionBar?) {
+        val lockMode =
+            if (enabled) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+        binding.drawerLayout.setDrawerLockMode(lockMode)
+        mDrawerToggle.isDrawerIndicatorEnabled = enabled
+        if (enabled) {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setHomeButtonEnabled(true)
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_drawer_menu)
+
+        } else {
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+            mDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_back_24dp)
+
+            mDrawerToggle.setToolbarNavigationClickListener {
+
+                    activity.onBackPressed()
+            }
+        }
     }
 
 

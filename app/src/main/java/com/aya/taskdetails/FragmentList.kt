@@ -1,6 +1,5 @@
 package com.aya.taskdetails
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.aya.taskdetails.databinding.FragmentListBinding
 import com.aya.taskdetails.network.responseModel.data.Article
+import com.aya.taskdetails.util.DrawerLocker
 import com.aya.taskdetails.viewModel.FragmentListViewModel
 import com.aya.taskdetails.viewModel.viewModelFactory.FragmentListViewModelFactory
 
@@ -36,16 +34,15 @@ class FragmentList   : Fragment() , View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        factory =
-            FragmentListViewModelFactory(
-               requireActivity(),
-                binding
-            )
+        factory = FragmentListViewModelFactory(requireActivity(), binding)
         viewModel = ViewModelProviders.of(this, factory).get(FragmentListViewModel::class.java)
+        // init Recycler
         viewModel.articleRecyclerViewInit(binding.articalRecyclerview)
-
+        //open drawer
+        (activity as DrawerLocker?)!!.setDrawerEnabled(true)
+        // get article
         viewModel.getArticle()
-
+        // put data in adapter
         viewModel.article.observe(viewLifecycleOwner, Observer {
             viewModel.adapter.setArticle(it)
             notifyDataChanged(it)
